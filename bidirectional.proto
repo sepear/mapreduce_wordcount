@@ -1,0 +1,41 @@
+
+syntax = "proto3";
+
+
+package wordcount;
+
+
+service Driver {
+  
+  rpc AssignWork (Ready) returns (Work) {}
+
+  rpc InitWorker (Ready) returns (Metadata) {}
+
+  rpc DoneTask (DoneInfo) returns (Ready) {}
+}
+
+
+message Ready {//sample message to say 
+  string state = 1;
+}
+
+message Work {//task content. if map is empty, then it's a reduce task
+  map<string, Pair> map = 1;# map <name_of_file,(start_line,end_line)>
+  int32 id=2;
+}
+
+message Pair {//beginning and end of the assigned section of the document
+  int32 start=1;
+  int32 end=2;
+}
+
+
+message Metadata {//used to give client info about M and N parameters
+  int32 M=1;
+  int32 N=2;
+}
+
+message DoneInfo {//message to notify of completed task 
+  int32 id=1;
+  string task_type=2;
+}
