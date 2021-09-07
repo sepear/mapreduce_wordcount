@@ -20,7 +20,7 @@ message Ready {//sample message to say
 }
 
 message Work {//task content. if map is empty, then it's a reduce task
-  map<string, Pair> map = 1;# map <name_of_file,(start_line,end_line)>
+  map<string, Pair> map = 1;// map <name_of_file,(start_line,end_line)>
   int32 id=2;
 }
 
